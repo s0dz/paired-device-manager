@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using PairedDeviceManager.Api.Models;
-using PairedDeviceManager.Api.Services;
+using PairedDeviceManager.Contract.Models;
+using PairedDeviceManager.Services;
 
 namespace PairedDeviceManager.Api.Controllers
 {
@@ -19,6 +19,7 @@ namespace PairedDeviceManager.Api.Controllers
         }
 
         [HttpGet]
+        [Route("todochange")]
         public Task<Device> GetDevice(long deviceId)
         {
             return _deviceService.GetDevice(deviceId);

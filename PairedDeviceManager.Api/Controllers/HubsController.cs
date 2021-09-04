@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PairedDeviceManager.Api.Services;
+using PairedDeviceManager.Services;
 
 namespace PairedDeviceManager.Api.Controllers
 {

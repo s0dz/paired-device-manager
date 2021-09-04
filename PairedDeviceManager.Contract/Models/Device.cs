@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace PairedDeviceManager.Api.Models
+namespace PairedDeviceManager.Contract.Models
 {
     [JsonObject]
     public class Device

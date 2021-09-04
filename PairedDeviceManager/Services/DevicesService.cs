@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using PairedDeviceManager.Api.Models;
+using PairedDeviceManager.Contract.Models;
 
-namespace PairedDeviceManager.Api.Services
+namespace PairedDeviceManager.Services
 {
     public interface IDeviceService
     {

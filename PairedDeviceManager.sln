@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairedDeviceManager.Api", "PairedDeviceManager.Api\PairedDeviceManager.Api.csproj", "{D7569CCE-03AC-41C0-AE97-D84F3C1B8AC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PairedDeviceManager.Api", "PairedDeviceManager.Api\PairedDeviceManager.Api.csproj", "{D7569CCE-03AC-41C0-AE97-D84F3C1B8AC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairedDeviceManager", "PairedDeviceManager\PairedDeviceManager.csproj", "{731DC023-FF17-4CAF-A390-9276B7331827}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PairedDeviceManager.Contract", "PairedDeviceManager.Contract\PairedDeviceManager.Contract.csproj", "{AE0337E4-A6FC-4D07-84CB-1C1D5C2D77B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{D7569CCE-03AC-41C0-AE97-D84F3C1B8AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7569CCE-03AC-41C0-AE97-D84F3C1B8AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7569CCE-03AC-41C0-AE97-D84F3C1B8AC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{731DC023-FF17-4CAF-A390-9276B7331827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{731DC023-FF17-4CAF-A390-9276B7331827}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{731DC023-FF17-4CAF-A390-9276B7331827}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{731DC023-FF17-4CAF-A390-9276B7331827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE0337E4-A6FC-4D07-84CB-1C1D5C2D77B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE0337E4-A6FC-4D07-84CB-1C1D5C2D77B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE0337E4-A6FC-4D07-84CB-1C1D5C2D77B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE0337E4-A6FC-4D07-84CB-1C1D5C2D77B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

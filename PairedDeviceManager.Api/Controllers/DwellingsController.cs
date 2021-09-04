@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PairedDeviceManager.Api.Models;
-using PairedDeviceManager.Api.Services;
+using PairedDeviceManager.Contract.Models;
+using PairedDeviceManager.Services;
 
 namespace PairedDeviceManager.Api.Controllers
 {

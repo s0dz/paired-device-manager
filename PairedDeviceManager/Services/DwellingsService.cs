@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using PairedDeviceManager.Api.Data;
-using PairedDeviceManager.Api.Models;
+using PairedDeviceManager.Contract.Models;
+using PairedDeviceManager.Data;
 
-namespace PairedDeviceManager.Api.Services
+namespace PairedDeviceManager.Services
 {
     public interface IDwellingService
     {

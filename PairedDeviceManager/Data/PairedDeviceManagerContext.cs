@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PairedDeviceManager.Api.Models;
+using PairedDeviceManager.Contract.Models;
 
-namespace PairedDeviceManager.Api.Data
+namespace PairedDeviceManager.Data
 {
     public class PairedDeviceManagerContext : DbContext
     {

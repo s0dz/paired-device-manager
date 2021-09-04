@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace PairedDeviceManager.Api.Models
+namespace PairedDeviceManager.Contract.Models
 {
     /// <summary>
     /// A living space where hubs and devices can be installed.

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PairedDeviceManager.Api.Models
+namespace PairedDeviceManager.Contract.Models
 {
     /// <summary>
     /// A hardware piece that interacts with devices.
