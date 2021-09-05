@@ -16,7 +16,7 @@ namespace PairedDeviceManager.Services
         /// <param name="dwellingId"></param>
         /// <param name="dwellingStatus"></param>
         /// <returns></returns>
-        Dwelling UpdateDwellingStatus(long dwellingId, DwellingStatus dwellingStatus);
+        Dwelling UpdateStatus(long dwellingId, DwellingStatus dwellingStatus);
 
         /// <summary>
         /// Associate a hub with a dwelling.
@@ -35,7 +35,7 @@ namespace PairedDeviceManager.Services
 
     public class DwellingsService : IDwellingService
     {
-        public Dwelling UpdateDwellingStatus(long dwellingId, DwellingStatus dwellingStatus)
+        public Dwelling UpdateStatus(long dwellingId, DwellingStatus dwellingStatus)
         {
             using (var context = new PairedDeviceManagerContext())
             {

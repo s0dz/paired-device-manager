@@ -1,9 +1,12 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace PairedDeviceManager.Contract.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum DwellingStatus
     {

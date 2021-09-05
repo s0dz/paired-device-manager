@@ -21,7 +21,7 @@ namespace PairedDeviceManager.Api.Controllers
         [Route("update-status")]
         public Dwelling UpdateDwellingStatus(long dwellingId, DwellingStatus dwellingStatus)
         {
-            return _dwellingService.UpdateDwellingStatus(dwellingId, dwellingStatus);
+            return _dwellingService.UpdateStatus(dwellingId, dwellingStatus);
         }
 
         [HttpPut]
@@ -32,6 +32,7 @@ namespace PairedDeviceManager.Api.Controllers
         }
 
         [HttpGet]
+        [Route("list")]
         public List<Dwelling> ListDwellings()
         {
             return _dwellingService.ListDwellings();

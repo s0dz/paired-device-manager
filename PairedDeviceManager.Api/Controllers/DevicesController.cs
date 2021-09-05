@@ -18,6 +18,7 @@ namespace PairedDeviceManager.Api.Controllers
             _deviceService = deviceService;
         }
 
+        /// <inheritdoc cref="IDeviceService.GetDevice"/>
         [HttpGet]
         [Route("todochange")]
         public Task<Device> GetDevice(long deviceId)
@@ -25,24 +26,28 @@ namespace PairedDeviceManager.Api.Controllers
             return _deviceService.GetDevice(deviceId);
         }
 
+        /// <inheritdoc cref="IDeviceService.GetDevices"/>
         [HttpGet]
         public Task<IReadOnlyCollection<Device>> GetDevices()
         {
             return _deviceService.GetDevices();
         }
 
+        /// <inheritdoc cref="IDeviceService.CreateDevice"/>
         [HttpPost]
         public Task<Device> CreateDevice(Device device)
         {
             return _deviceService.CreateDevice(device);
         }
 
+        /// <inheritdoc cref="IDeviceService.UpdateDevice"/>
         [HttpPut]
         public Task<Device> UpdateDevice(Device device)
         {
             return _deviceService.UpdateDevice(device);
         }
 
+        /// <inheritdoc cref="IDeviceService.DeleteDevice"/>
         [HttpDelete]
         public Task DeleteDevice(long deviceId)
         {
