@@ -46,5 +46,16 @@ For example:
 
 # Projects in this solution
 ## PairedDeviceManager
+Data - Uses Entity Framework Core as the ORM to a SQL Server Express DB.
+Migrations - Generates DB based on device, dwelling and hub DTOs.
+Services - Business logic services for devices, dwellings and hubs.
+
 ## PairedDeviceManager.Api
+Provide web API endpoints to interact with services. 
+
 ## PairedDeviceManager.Contract
+Publishable collection of DTOs, request objects and response objects.
+
+# TODO
+Make a factory to provide the DB Context.
+Make a test suite in a standalone project.
