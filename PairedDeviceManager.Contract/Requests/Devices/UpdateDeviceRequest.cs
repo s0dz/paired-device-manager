@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PairedDeviceManager.Contract.Models;
 
 namespace PairedDeviceManager.Contract.Requests.Devices
 {
-    class UpdateDeviceRequest
+    public class UpdateDeviceRequest
     {
+        public Device Device { get; set; }
     }
 }

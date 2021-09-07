@@ -1,61 +1,53 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using PairedDeviceManager.Contract.Models;
+using PairedDeviceManager.Contract.Requests.Hubs;
+using PairedDeviceManager.Contract.Responses;
+using PairedDeviceManager.Contract.Responses.Hubs;
 using PairedDeviceManager.Services;
 
 namespace PairedDeviceManager.Api.Controllers
 {
+    /// <summary>
+    /// API Endpoints for Hubs
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class HubsController : BaseApiController
+    public class HubsController : ControllerBase
     {
-        private readonly IHubService _hubService;
+        private readonly IHubsService _hubService;
 
-        public HubsController(IHubService hubService, ILogger logger) : base(logger)
+        public HubsController(IHubsService hubService)
         {
             _hubService = hubService;
         }
 
-        /// <summary>
-        /// Pair a previously created device.
-        /// </summary>
-        /// <param name="deviceId"></param>
-        /// <returns></returns>
+        /// <inheritdoc cref="IHubsService.PairDevice"/>
         [HttpPut]
         [Route("pair-device")]
-        public Task<Hub> PairDevice(long deviceId)
+        public async Task<BaseResponse> PairDevice([FromBody] PairDeviceRequest request)
         {
-            return _hubService.PairDevice(deviceId);
+            return await _hubService.PairDevice(request);
         }
 
 
         // TODO: Get Device State - Get information about a device as
+        // Need Clarification on this requirement.
 
 
-        /// <summary>
-        /// Get a list of devices paired to a hub
-        /// </summary>
-        /// <param name="hubId"></param>
-        /// <returns></returns>
+        /// <inheritdoc cref="IHubsService.GetHubDevices"/>
         [HttpGet]
         [Route("devices")]
-        public Task<IEnumerable<Device>> GetDevices(long hubId)
+        public async Task<GetHubDevicesResponse> GetDevices([FromQuery] GetHubDevicesRequest request)
         {
-            return _hubService.GetDevices(hubId);
+            return await _hubService.GetHubDevices(request);
         }
 
-        /// <summary>
-        /// Unpair a device from a hub.
-        /// </summary>
-        /// <param name="deviceId"></param>
-        /// <returns></returns>
+        /// <inheritdoc cref="IHubsService.RemoveDevice"/>
         [HttpDelete]
         [Route("remove-device")]
-        public Task RemoveDevice(long deviceId)
+        public async Task<BaseResponse> RemoveDevice([FromQuery] RemoveDeviceRequest request)
         {
-            return _hubService.RemoveDevice(deviceId);
+            return await _hubService.RemoveDevice(request);
         }
     }
 }

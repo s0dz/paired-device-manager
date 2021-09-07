@@ -1,41 +1,48 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using PairedDeviceManager.Contract.Models;
+using PairedDeviceManager.Contract.Requests.Dwellings;
+using PairedDeviceManager.Contract.Responses;
+using PairedDeviceManager.Contract.Responses.Dwellings;
 using PairedDeviceManager.Services;
 
 namespace PairedDeviceManager.Api.Controllers
 {
+    /// <summary>
+    /// API Endpoints for Dwellings
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class DwellingsController : BaseApiController
+    public class DwellingsController : ControllerBase
     {
-        private readonly IDwellingService _dwellingService;
+        private readonly IDwellingsService _dwellingService;
 
-        public DwellingsController(IDwellingService dwellingService, ILogger logger) : base(logger)
+        public DwellingsController(IDwellingsService dwellingService)
         {
             _dwellingService = dwellingService;
         }
 
+        /// <inheritdoc cref="IDwellingsService.UpdateStatus"/>
         [HttpPut]
         [Route("update-status")]
-        public Dwelling UpdateDwellingStatus(long dwellingId, DwellingStatus dwellingStatus)
+        public async Task<BaseResponse> UpdateDwellingStatus([FromBody] UpdateDwellingStatusRequest request)
         {
-            return _dwellingService.UpdateStatus(dwellingId, dwellingStatus);
+            return await _dwellingService.UpdateStatus(request);
         }
 
+        /// <inheritdoc cref="IDwellingsService.InstallHub"/>
         [HttpPut]
         [Route("install-hub")]
-        public bool InstallHub(long dwellingId, long hubId)
+        public async Task<BaseResponse> InstallHub([FromBody] InstallHubRequest request)
         {
-            return _dwellingService.InstallHub(dwellingId, hubId);
+            return await _dwellingService.InstallHub(request);
         }
 
+        /// <inheritdoc cref="IDwellingsService.ListDwellings"/>
         [HttpGet]
         [Route("list")]
-        public List<Dwelling> ListDwellings()
+        public async Task<ListDwellingsResponse> ListDwellings()
         {
-            return _dwellingService.ListDwellings();
+            return await _dwellingService.ListDwellings();
         }
     }
 }

@@ -1,6 +1,9 @@
 ﻿namespace PairedDeviceManager.Contract.Requests.Dwellings
 {
-    class InstallHubRequest
+    public class InstallHubRequest
     {
+        public long DwellingId { get; set; }
+
+        public long HubId { get; set; }
     }
 }

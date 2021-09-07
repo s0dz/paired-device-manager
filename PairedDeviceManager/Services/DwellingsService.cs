@@ -1,89 +1,153 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PairedDeviceManager.Contract.Models;
+using PairedDeviceManager.Contract.Requests.Dwellings;
+using PairedDeviceManager.Contract.Responses;
+using PairedDeviceManager.Contract.Responses.Dwellings;
 using PairedDeviceManager.Data;
 
 namespace PairedDeviceManager.Services
 {
-    public interface IDwellingService
+    public interface IDwellingsService
     {
         /// <summary>
         /// Update dwelling status:
         /// A new resident has moved into the dwelling. <see cref="DwellingStatus.Occupied"/>
         /// A resident no longer resides in the dwelling. <see cref="DwellingStatus.Vacant"/>
         /// </summary>
-        /// <param name="dwellingId"></param>
-        /// <param name="dwellingStatus"></param>
+        /// <param name="request"></param>
         /// <returns></returns>
-        Dwelling UpdateStatus(long dwellingId, DwellingStatus dwellingStatus);
+        Task<BaseResponse> UpdateStatus(UpdateDwellingStatusRequest request);
 
         /// <summary>
         /// Associate a hub with a dwelling.
         /// </summary>
-        /// <param name="dwellingId"></param>
-        /// <param name="hubId"></param>
+        /// <param name="request"></param>
         /// <returns></returns>
-        bool InstallHub(long dwellingId, long hubId);
+        Task<BaseResponse> InstallHub(InstallHubRequest request);
 
         /// <summary>
         /// Get a list of all dwellings.
         /// </summary>
         /// <returns></returns>
-        List<Dwelling> ListDwellings();
+        Task<ListDwellingsResponse> ListDwellings();
     }
 
-    public class DwellingsService : IDwellingService
+    public class DwellingsService : IDwellingsService
     {
-        public Dwelling UpdateStatus(long dwellingId, DwellingStatus dwellingStatus)
+        /// <inheritdoc />
+        public async Task<BaseResponse> UpdateStatus(UpdateDwellingStatusRequest request)
         {
-            using (var context = new PairedDeviceManagerContext())
+            try
             {
-                var dwelling = context.Dwellings.FirstOrDefaultAsync(d => d.Id == dwellingId).Result;
+                await using var context = new PairedDeviceManagerContext();
+
+                var dwelling = await context.Dwellings.FirstOrDefaultAsync(d => d.Id == request.DwellingId);
 
                 if (dwelling != null)
                 {
-                    dwelling.DwellingStatus = dwellingStatus;
-                    context.SaveChangesAsync();
+                    dwelling.DwellingStatus = request.DwellingStatus;
+                    await context.SaveChangesAsync();
 
-                    return dwelling;
+                    return new BaseResponse { Success = true };
                 }
                 else
                 {
-                    // TODO: Handle case where no dwelling with dwellingId is found.
-                    return null;
+                    return new BaseResponse
+                    {
+                        Success = false,
+                        Message = "Dwelling not found."
+                    };
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+                while (e.InnerException != null) e = e.InnerException;
+
+                return new ListDwellingsResponse
+                {
+                    Success = false,
+                    Message = $"Exception: {e.Message}"
+                };
             }
         }
 
-        public bool InstallHub(long dwellingId, long hubId)
+        /// <inheritdoc />
+        public async Task<BaseResponse> InstallHub(InstallHubRequest request)
         {
-            using (var context = new PairedDeviceManagerContext())
+            try
             {
-                var dwelling = context.Dwellings.FirstOrDefaultAsync(d => d.Id == dwellingId).Result;
-                var hub = context.Hubs.FirstOrDefaultAsync(h => h.Id == hubId).Result;
+                await using var context = new PairedDeviceManagerContext();
+
+                var dwelling = await context.Dwellings.FirstOrDefaultAsync(d => d.Id == request.DwellingId);
+                var hub = await context.Hubs.FirstOrDefaultAsync(h => h.Id == request.HubId);
 
                 if (dwelling != null && hub != null)
                 {
                     dwelling.Hubs.Add(hub);
-                    context.SaveChangesAsync();
+                    await context.SaveChangesAsync();
 
-                    return true;
+                    return new BaseResponse { Success = true };
                 }
                 else
                 {
-                    return false;
+                    return new BaseResponse
+                    {
+                        Success = false,
+                        Message = "Dwelling and/or hub not found."
+                    };
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+                while (e.InnerException != null) e = e.InnerException;
+
+                return new ListDwellingsResponse
+                {
+                    Success = false,
+                    Message = $"Exception: {e.Message}"
+                };
             }
         }
 
-        public List<Dwelling> ListDwellings()
+        /// <inheritdoc />
+        public async Task<ListDwellingsResponse> ListDwellings()
         {
-            using (var context = new PairedDeviceManagerContext())
+            try
             {
-                var dwellings = context.Dwellings.ToList();
+                await using var context = new PairedDeviceManagerContext();
 
-                return dwellings;
+                var dwellings = await context.Dwellings.ToListAsync();
+
+                if (dwellings.Count > 0)
+                {
+                    return new ListDwellingsResponse { Dwellings = dwellings };
+                }
+                else
+                {
+                    return new ListDwellingsResponse
+                    {
+                        Success = false,
+                        Message = "Dwellings not found."
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+                while (e.InnerException != null) e = e.InnerException;
+
+                return new ListDwellingsResponse
+                {
+                    Success = false,
+                    Message = $"Exception: {e.Message}"
+                };
             }
         }
     }

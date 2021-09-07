@@ -1,6 +1,9 @@
-﻿namespace PairedDeviceManager.Contract.Responses.Devices
+﻿using PairedDeviceManager.Contract.Models;
+
+namespace PairedDeviceManager.Contract.Responses.Devices
 {
-    public class GetDeviceResponse
+    public class GetDeviceResponse : BaseResponse
     {
+        public Device Device { get; set; }
     }
 }

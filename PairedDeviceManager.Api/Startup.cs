@@ -1,12 +1,10 @@
-using System;
-using System.IO;
-using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using PairedDeviceManager.Services;
 
 namespace PairedDeviceManager.Api
 {
@@ -23,6 +21,10 @@ namespace PairedDeviceManager.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<IDevicesService, DevicesService>();
+            services.AddScoped<IHubsService, HubsService>();
+            services.AddScoped<IDwellingsService, DwellingsService>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>

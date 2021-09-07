@@ -1,6 +1,10 @@
-﻿namespace PairedDeviceManager.Contract.Responses.Dwellings
+﻿using System.Collections.Generic;
+using PairedDeviceManager.Contract.Models;
+
+namespace PairedDeviceManager.Contract.Responses.Dwellings
 {
-    class ListDwellingsResponse
+    public class ListDwellingsResponse : BaseResponse
     {
+        public IReadOnlyCollection<Dwelling> Dwellings { get; set; }
     }
 }

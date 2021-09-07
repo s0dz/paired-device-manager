@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using PairedDeviceManager.Contract.Models;
 
-namespace PairedDeviceManager.Contract.Responses.Devices
+namespace PairedDeviceManager.Contract.Responses.Hubs
 {
-    public class GetDevicesResponse : BaseResponse
+    public class GetHubDevicesResponse : BaseResponse
     {
         public ICollection<Device> Devices { get; set; }
     }

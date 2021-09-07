@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PairedDeviceManager.Contract.Models
 {
@@ -13,6 +14,7 @@ namespace PairedDeviceManager.Contract.Models
 
 
         // Navigation property
+        [JsonIgnore]
         public ICollection<Device> Devices { get; set; }
     }
 }

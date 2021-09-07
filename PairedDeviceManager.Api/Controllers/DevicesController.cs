@@ -1,57 +1,64 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using PairedDeviceManager.Contract.Models;
+using PairedDeviceManager.Contract.Requests.Devices;
+using PairedDeviceManager.Contract.Responses;
+using PairedDeviceManager.Contract.Responses.Devices;
 using PairedDeviceManager.Services;
 
 namespace PairedDeviceManager.Api.Controllers
 {
+    /// <summary>
+    /// API Endpoints for Devices
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class DevicesController : BaseApiController
+    public class DevicesController : ControllerBase
     {
-        private readonly IDeviceService _deviceService;
+        private readonly IDevicesService _devicesService;
 
-        public DevicesController(IDeviceService deviceService, ILogger logger) : base(logger)
+        public DevicesController(IDevicesService devicesService)
         {
-            _deviceService = deviceService;
+            _devicesService = devicesService;
         }
 
-        /// <inheritdoc cref="IDeviceService.GetDevice"/>
+        /// <inheritdoc cref="IDevicesService.GetDevice"/>
         [HttpGet]
-        [Route("todochange")]
-        public Task<Device> GetDevice(long deviceId)
+        [Route("get-by-id")]
+        public async Task<GetDeviceResponse> GetDevice([FromQuery] GetDeviceRequest request)
         {
-            return _deviceService.GetDevice(deviceId);
+            return await _devicesService.GetDevice(request);
         }
 
-        /// <inheritdoc cref="IDeviceService.GetDevices"/>
+        /// <inheritdoc cref="IDevicesService.GetDevices"/>
         [HttpGet]
-        public Task<IReadOnlyCollection<Device>> GetDevices()
+        [Route("list")]
+        public async Task<GetDevicesResponse> GetDevices()
         {
-            return _deviceService.GetDevices();
+            return await _devicesService.GetDevices();
         }
 
-        /// <inheritdoc cref="IDeviceService.CreateDevice"/>
+        /// <inheritdoc cref="IDevicesService.CreateDevice"/>
         [HttpPost]
-        public Task<Device> CreateDevice(Device device)
+        [Route("create")]
+        public async Task<BaseResponse> CreateDevice([FromBody] CreateDeviceRequest request)
         {
-            return _deviceService.CreateDevice(device);
+            return await _devicesService.CreateDevice(request);
         }
 
-        /// <inheritdoc cref="IDeviceService.UpdateDevice"/>
+        /// <inheritdoc cref="IDevicesService.UpdateDevice"/>
         [HttpPut]
-        public Task<Device> UpdateDevice(Device device)
+        [Route("update")]
+        public async Task<BaseResponse> UpdateDevice([FromBody] UpdateDeviceRequest request)
         {
-            return _deviceService.UpdateDevice(device);
+            return await _devicesService.UpdateDevice(request);
         }
 
-        /// <inheritdoc cref="IDeviceService.DeleteDevice"/>
+        /// <inheritdoc cref="IDevicesService.DeleteDevice"/>
         [HttpDelete]
-        public Task DeleteDevice(long deviceId)
+        [Route("delete")]
+        public async Task<BaseResponse> DeleteDevice([FromBody] DeleteDeviceRequest request)
         {
-            return _deviceService.DeleteDevice(deviceId);
+            return await _devicesService.DeleteDevice(request);
         }
     }
 }
